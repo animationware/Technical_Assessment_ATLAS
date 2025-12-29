@@ -13,7 +13,7 @@ services:
       - mysql_data:/var/lib/mysql  # Persistencia de la base de datos en el volumen "mysql_data"
       - ./initdb:/docker-entrypoint-initdb.d  # Scripts SQL que se ejecutan al iniciar el contenedor
     command: --default-authentication-plugin=mysql_native_password  
-    # Forzamos el plugin de autenticación nativo para compatibilidad con clientes antiguos
+    ## Forzamos el plugin de autenticación nativo para compatibilidad con clientes antiguos
 
 volumes:
   mysql_data:  # Definimos un volumen llamado "mysql_data" para persistir los datos de MySQL
