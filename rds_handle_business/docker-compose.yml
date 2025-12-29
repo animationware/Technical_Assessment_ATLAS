@@ -1,0 +1,19 @@
+services:
+  mysql:  # Definimos el servicio llamado "mysql"
+    image: mysql:8.0  # Usamos la imagen oficial de MySQL versión 8.0
+    container_name: mysql_rds_handle_business  # Nombre del contenedor que se creará
+    restart: unless-stopped  # El contenedor se reinicia automáticamente salvo que sea detenido manualmente
+    network_mode: host  # El contenedor comparte la red del host (la máquina donde corre Docker)
+    environment:  # Variables de entorno para configurar MySQL
+      MYSQL_ROOT_PASSWORD: rootpassword  # Contraseña del usuario root de MySQL
+      MYSQL_DATABASE: rds_handle_business  # Nombre de la base de datos que se crea al iniciar el contenedor
+      MYSQL_USER: appuser  # Usuario adicional que se crea con permisos sobre la base de datos
+      MYSQL_PASSWORD: apppassword  # Contraseña del usuario adicional
+    volumes:  # Volúmenes para persistencia de datos y scripts de inicialización
+      - mysql_data:/var/lib/mysql  # Persistencia de la base de datos en el volumen "mysql_data"
+      - ./initdb:/docker-entrypoint-initdb.d  # Scripts SQL que se ejecutan al iniciar el contenedor
+    command: --default-authentication-plugin=mysql_native_password  
+    # Forzamos el plugin de autenticación nativo para compatibilidad con clientes antiguos
+
+volumes:
+  mysql_data:  # Definimos un volumen llamado "mysql_data" para persistir los datos de MySQL
