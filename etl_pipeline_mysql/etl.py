@@ -4,7 +4,7 @@ import mysql.connector
 # Creamos un objeto ConfigParser para leer la configuración desde un archivo .ini
 config = configparser.ConfigParser()
 
-# Leemos el archivo "config.ini" que contiene los datos de conexión a las bases de datos
+## Leemos el archivo "config.ini" que contiene los datos de conexión a las bases de datos
 config.read("config.ini")
 
 def create_database_if_not_exists():
